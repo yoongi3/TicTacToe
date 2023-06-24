@@ -1,17 +1,42 @@
 const gameBoard = (() => {
-    let board = [['1','2','3'],['4','5','6'],['7','8','9']]
+    let board = new Array(9);
+
     const getBoard = () => {
-        console.log(board)
+        for (let i = 0;i < 9; i++){     // TEMPORARY - to display board on console
+            board[i] = 'O'
+        }
         return board;
     }
+
+    const placeMark = (pos, player) => {
+        board[pos] = 'X';
+        console.log(board)
+    }
+
     return {
-        getBoard,
+        getBoard, placeMark,
     };
 }
 )();
 
 const gameController = (() => {
-    // checkForWin()
+    const board = gameBoard;
+    board.getBoard();
+
+    const switchPlayerTurn = () => {
+        playRound();
+    }
+
+    const playRound = () => {
+        let pos = prompt("choose spot");
+        if(pos == "stop"){      // TEMPORARY should check for win/lose/draw
+            return
+        }
+        board.placeMark(pos);
+        switchPlayerTurn();
+    }
+
+    playRound()
 })();
 
 const player = (name, marker) => {
@@ -21,7 +46,5 @@ const player = (name, marker) => {
     return{name, marker, test};
 };
 
-const player1 = player('p1','x')
+gameController
 
-gameBoard.getBoard();
-player1.test();
