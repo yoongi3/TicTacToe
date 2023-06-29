@@ -2,8 +2,9 @@ const gameBoard = (() => {
     let board = new Array(9);
 
     const getBoard = () => {
-        for (let i = 0;i < 9; i++){     // TEMPORARY - to display board on console
-            board[i] = 'O'
+
+        for (let i = 0;i < 9; i++){
+            document.getElementById("board").childNodes[2*i +1].textContent = "0"
         }
         return board;
     }
@@ -24,7 +25,6 @@ const gameController = (() => {
     board.getBoard();
 
     const switchPlayerTurn = () => {
-        playRound();
     }
 
     const playRound = () => {
@@ -33,7 +33,6 @@ const gameController = (() => {
             return
         }
         board.placeMark(pos);
-        switchPlayerTurn();
     }
 
     playRound()

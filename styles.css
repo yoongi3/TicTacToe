@@ -1,0 +1,17 @@
+#board{
+    display: grid;
+    grid-template-columns: 80px 80px 80px;
+    grid-template-rows: 80px 80px 80px;
+    justify-content: center;
+}
+.field{
+    border-bottom: 3px solid;
+    border-right: 3px solid;
+    text-align: center;
+}
+.r{
+    border-right: none;
+}
+.b{
+    border-bottom: none;
+}
