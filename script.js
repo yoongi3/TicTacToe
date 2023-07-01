@@ -9,9 +9,9 @@ const gameBoard = (() => {
         return board;
     }
 
-    const placeMark = (pos, player) => {
-        board[pos] = 'X'
-        document.getElementById("board").childNodes[2*pos+1].textContent = 'X';
+    const placeMark = (pos, marker) => {
+        board[pos] = marker
+        document.getElementById("board").childNodes[2*pos+1].textContent = marker;
         console.log(board)
     }
 
@@ -21,15 +21,24 @@ const gameBoard = (() => {
 }
 )();
 
+const player = (name, marker) => {
+    return{name, marker};
+};
+
 const gameController = (() => {
     const board = gameBoard;
-    board.getBoard();
+    let player1 = player('p1', 'X')
+    let player2 = player('p2', 'O')
+
+    let activePlayer = player1;
 
     const switchPlayerTurn = () => {
+        activePlayer = activePlayer === player1 ? player2 : player1
     }
 
     const makeMove = (pos) => {
-        board.placeMark(pos)
+        board.placeMark(pos, activePlayer.marker)
+        switchPlayerTurn()
     }
 
     return{
@@ -48,12 +57,6 @@ const displayController = (() => {
     }
 })();
 
-const player = (name, marker) => {
-    const test = () => {
-        console.log (name + " is my name");
-    };
-    return{name, marker, test};
-};
 
-gameController
+
 
