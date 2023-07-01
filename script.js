@@ -1,12 +1,11 @@
 const gameBoard = (() => {
     let board = new Array(9);
 
-    const getBoard = () => {
-
+    const resetBoard = () => {
         for (let i = 0;i < 9; i++){
-            document.getElementById("board").childNodes[2*i+1].textContent = " "
+            document.getElementById("board").childNodes[2*i+1].textContent = " ";
+            board[i] = undefined;
         }
-        return board;
     }
 
     const placeMark = (pos, marker) => {
@@ -15,8 +14,8 @@ const gameBoard = (() => {
         console.log(board)
     }
 
-    return {
-        getBoard, placeMark,
+    return { 
+        board, resetBoard, placeMark,
     };
 }
 )();
@@ -37,8 +36,12 @@ const gameController = (() => {
     }
 
     const makeMove = (pos) => {
-        board.placeMark(pos, activePlayer.marker)
-        switchPlayerTurn()
+        if (board.board[pos] === undefined)
+            {board.placeMark(pos, activePlayer.marker)
+            switchPlayerTurn()
+            return
+        }
+        console.log("spot taken")
     }
 
     return{
