@@ -5,6 +5,7 @@
     justify-content: center;
 }
 .field{
+    border: none;
     border-bottom: 3px solid;
     border-right: 3px solid;
     text-align: center;
