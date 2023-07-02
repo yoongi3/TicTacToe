@@ -1,8 +1,12 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 #board{
     display: grid;
     grid-template-columns: 80px 80px 80px;
     grid-template-rows: 80px 80px 80px;
-    justify-content: center;
 }
 .field{
     border: none;
@@ -15,4 +19,16 @@
 }
 .b{
     border-bottom: none;
+}
+.name-display{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.name-buttons{
+    display: flex;
+    justify-content: center;
+}
+.result{
+    text-align: center;
 }

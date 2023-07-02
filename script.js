@@ -43,12 +43,13 @@ const gameController = (() => {
                 console.log(activePlayer.marker+' wins');
                 activePlayer = player1;
                 board.resetBoard();
-                return
+                return;
             }
             else if(checkForDraw()){
                 console.log('draw')
                 activePlayer = player1
                 board.resetBoard();
+                return;
             }
 
             switchPlayerTurn()

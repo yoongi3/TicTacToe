@@ -6,16 +6,30 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="board">
-        <button class="field"></button>
-        <button class="field"></button>
-        <button class="field r"></button>
-        <button class="field"></button>
-        <button class="field"></button>
-        <button class="field r"></button>
-        <button class="field b"></button>
-        <button class="field b"></button>
-        <button class="field r b"></button>
+    <div class="container">
+        <div class="names">
+            <div class="name-display">
+                <div class="player1">Player1<p>X</p></div>
+                <div class="player2">Player2<p>O</p></div>
+            </div>
+            <div class="name-buttons">
+                <button id="player1">Change Name</button>
+                <button id="player2">Change Name</button>
+            </div>
+        </div>
+        <div id="board">
+            <button class="field"></button>
+            <button class="field"></button>
+            <button class="field r"></button>
+            <button class="field"></button>
+            <button class="field"></button>
+            <button class="field r"></button>
+            <button class="field b"></button>
+            <button class="field b"></button>
+            <button class="field r b"></button>
+        </div>
+        <button id="reset">Reset</div>
+        <div class="result">X wins</div>
     </div>
 
     <script src="script.js"></script>
