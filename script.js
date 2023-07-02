@@ -6,7 +6,6 @@ const gameBoard = (() => {
             document.getElementById("board").childNodes[2*i+1].textContent = " ";
             board[i] = undefined;
         }
-        console.log('reset')
     }
 
     const placeMark = (pos, marker) => {
@@ -36,14 +35,22 @@ const gameController = (() => {
     }
 
     const makeMove = (pos) => {
-        if (board.board[pos] === undefined)
-            {board.placeMark(pos, activePlayer.marker)
+        if (board.board[pos] === undefined){
+
+            board.placeMark(pos, activePlayer.marker)
+
             if(checkForWin()){
-                console.log(activePlayer.marker+' wins')
-                activePlayer = player1
-                board.resetBoard()
+                console.log(activePlayer.marker+' wins');
+                activePlayer = player1;
+                board.resetBoard();
                 return
             }
+            else if(checkForDraw()){
+                console.log('draw')
+                activePlayer = player1
+                board.resetBoard();
+            }
+
             switchPlayerTurn()
             return
         }
@@ -55,6 +62,14 @@ const gameController = (() => {
             return true;
         }
         return false;
+    }
+    const checkForDraw = () => {
+        for (let i=0; i<9; i++){
+            if (board.board[i] == undefined){
+                return false
+            }
+        }
+        return true;
     }
     const checkForRow = () =>{
         for (let i=0; i<3; i++){
