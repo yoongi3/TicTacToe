@@ -30,6 +30,9 @@ const gameController = (() => {
 
     let activePlayer = player1;
 
+    const startingPlayer = ()=> {
+        activePlayer = player1
+    }
     const switchPlayerTurn = () => {
         activePlayer = activePlayer === player1 ? player2 : player1
     }
@@ -109,12 +112,18 @@ const gameController = (() => {
     }
 
     return{
-        makeMove
+        makeMove, startingPlayer
     };
 })();
 
 const displayController = (() => {
     const board = gameBoard;
+
+    const changeName1 = document.getElementById('player1');
+    const changeName2 = document.getElementById('player2');
+    const resetBtn = document.getElementById('reset');
+
+    const result = document.getElementById('result');
 
     const htmlBoard = Array.from(document.querySelectorAll('button.field'));
     
@@ -122,6 +131,17 @@ const displayController = (() => {
         const button = htmlBoard[i]
         button.addEventListener('click', gameController.makeMove.bind(button, i))
     }
+
+    changeName1.addEventListener('click', function() {console.log('hi')})
+    changeName2.addEventListener('click', function() {console.log('hi')})
+    
+
+    const reset = () =>{
+        board.resetBoard();
+        gameController.startingPlayer();
+        result.textContent = " ";
+    }
+    resetBtn.addEventListener('click', reset)
 
 })();
 
