@@ -6,6 +6,7 @@ const gameBoard = (() => {
             document.getElementById("board").childNodes[2*i+1].textContent = " ";
             board[i] = undefined;
         }
+        console.log('reset')
     }
 
     const placeMark = (pos, marker) => {
@@ -37,15 +38,18 @@ const gameController = (() => {
     const makeMove = (pos) => {
         if (board.board[pos] === undefined)
             {board.placeMark(pos, activePlayer.marker)
-            switchPlayerTurn()
             if(checkForWin()){
-                console.log("winner")
+                console.log(activePlayer.marker+' wins')
+                activePlayer = player1
+                board.resetBoard()
+                return
             }
+            switchPlayerTurn()
             return
         }
         console.log("spot taken")
     }
-    
+
     const checkForWin = () => {
         if (checkForRow() || checkForColumn() || checkForDiagonal()){
             return true;
@@ -59,7 +63,6 @@ const gameController = (() => {
                 row.push(board.board[j])
             }
             if (row.every(field => field === "X") || row.every(field => field === "O")){
-                console.log('row')
                 return true
             }
         }  
@@ -72,7 +75,6 @@ const gameController = (() => {
                 col.push(board.board[i+3*j])
             }
             if (col.every(field => field === "X") || col.every(field => field === "O")){
-                console.log('col')
                 return true
             }
         }  
