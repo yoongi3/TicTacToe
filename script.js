@@ -19,14 +19,24 @@ const gameBoard = (() => {
 }
 )();
 
-const player = (name, marker) => {
-    return{name, marker};
+const player = (name, marker, textBox) => {
+
+    return{name, marker, textBox};
 };
 
 const gameController = (() => {
     const board = gameBoard;
-    let player1 = player('p1', 'X')
-    let player2 = player('p2', 'O')
+
+    const name1 = document.getElementById('name1')
+    const name2 = document.getElementById('name2')
+
+    let player1 = player('Player1', 'X', name1)
+    let player2 = player('Player2', 'O', name2)
+
+    const changeName = (player) => {
+        player.name = prompt("choose name")
+        player.textBox.textContent = player.name;
+    }
 
     let activePlayer = player1;
 
@@ -43,9 +53,8 @@ const gameController = (() => {
             board.placeMark(pos, activePlayer.marker)
 
             if(checkForWin()){
-                console.log(activePlayer.marker+' wins');
-                activePlayer = player1;
-                board.resetBoard();
+                console.log(activePlayer)
+                displayController.results(activePlayer);
                 return;
             }
             else if(checkForDraw()){
@@ -112,38 +121,46 @@ const gameController = (() => {
     }
 
     return{
-        makeMove, startingPlayer
+        activePlayer, player1, player2, changeName, makeMove, startingPlayer
     };
 })();
 
 const displayController = (() => {
     const board = gameBoard;
 
-    const changeName1 = document.getElementById('player1');
-    const changeName2 = document.getElementById('player2');
     const resetBtn = document.getElementById('reset');
-
     const result = document.getElementById('result');
 
     const htmlBoard = Array.from(document.querySelectorAll('button.field'));
     
-    for(let i=0;i<htmlBoard.length;i++){
-        const button = htmlBoard[i]
-        button.addEventListener('click', gameController.makeMove.bind(button, i))
+    const results = (_player) => {
+        console.log("here")
+        result.textContent = _player.name + " wins"
     }
-
-    changeName1.addEventListener('click', function() {console.log('hi')})
-    changeName2.addEventListener('click', function() {console.log('hi')})
     
-
-    const reset = () =>{
+    const reset = () => {
         board.resetBoard();
         gameController.startingPlayer();
         result.textContent = " ";
     }
-    resetBtn.addEventListener('click', reset)
 
+    const init = (() => {
+        for(let i=0;i<htmlBoard.length;i++){
+            const button = htmlBoard[i]
+            button.addEventListener('click', gameController.makeMove.bind(button, i))
+        }
+
+        changeName1.addEventListener('click', function(){gameController.changeName(gameController.player1)})
+        changeName2.addEventListener('click', function(){gameController.changeName(gameController.player2)})
+
+        resetBtn.addEventListener('click', reset)
+    })();
+    return{
+        results,
+    }
 })();
+
+
 
 
 
